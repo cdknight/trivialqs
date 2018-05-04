@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TrivialQuestions</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  </head>
+  <body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+          $(function() {
+            var socket = io();
+            $('#onebtn').on('click', function(){
+                socket.emit('sended', 1);
+            });
+            $('#twobtn').on('click', function(){
+                socket.emit('sended', 2);
+            });
+            $('#threebtn').on('click', function(){
+                socket.emit('sended', 3);
+            });
+            $('#fourbtn').on('click', function(){
+                socket.emit('sended', 4);
+            });
+
+            socket.on('correct', function(val){
+                console.log("recieved correct or not " + val);
+                if (val == true){
+                    $("#answer_status").text("The answer was correct");
+                }
+                else if (val == false) {
+                    $("#answer_status").text("The answer was incorrect");
+                }
+            });
+          })
+    </script>
+    <p id="answer_status"></p>
+    <button id="onebtn">1</button>
+    <button id="twobtn">2</button>
+    <button id="threebtn">3</button>
+    <button id="fourbtn">4</button>
+
+  </body>
+</html>

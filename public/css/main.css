@@ -1,0 +1,37 @@
+#onebtn {
+    background-color: green; 
+    border: none; 
+    padding: 100px;
+    font-size: 500%;  
+    cursor: pointer;  
+}
+
+#twobtn {
+    background-color: blue; 
+    border: none; 
+    padding: 100px; 
+    font-size: 500%;  
+    cursor: pointer;  
+}
+
+#threebtn {
+    background-color: red; 
+    border: none; 
+    padding: 100px; 
+    font-size: 500%;  
+    cursor: pointer;  
+}
+
+
+#fourbtn {
+    background-color: gold; 
+    border: none; 
+    padding: 100px; 
+    font-size: 500%; 
+    cursor: pointer;  
+}
+
+#answer_status {
+    font-family: sans-serif, Verdana, Arial, Helvetica;
+    font-size: 200%; 
+}
