@@ -35,3 +35,21 @@
     font-family: sans-serif, Verdana, Arial, Helvetica;
     font-size: 200%; 
 }
+
+h1 {
+    font-family: sans-serif, Verdana, Arial, Helvetica;
+}
+
+#question{
+    font-family: sans-serif, Verdana, Arial, Helvetica;
+    font-size: 200%; 
+}
+
+#correct{
+    font-family: sans-serif, Verdana, Arial, Helvetica;
+    font-size: 200%; 
+}
+
+button {
+    color: white; 
+}

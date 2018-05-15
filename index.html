@@ -3,6 +3,7 @@
   <head>
     <title>TrivialQuestions</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
     <script src="/socket.io/socket.io.js"></script>
@@ -10,6 +11,7 @@
     <script>
           $(function() {
             var socket = io();
+            var end = false; 
             $('#onebtn').on('click', function(){
                 socket.emit('sended', 1);
             });
@@ -32,8 +34,67 @@
                     $("#answer_status").text("The answer was incorrect");
                 }
             });
+            socket.on('questionlist', function(list){
+                if (end == true){
+                    console.log('here');
+                    $('#onebtn').hide()
+                    $('#twobtn').hide()
+                    $('#threebtn').hide(); 
+                    $('#fourbtn').hide(); 
+                    $("#question").hide(); 
+                }
+                else{
+                    console.log(list)
+                var listlen = list.length;
+                console.log(listlen)
+                $("#question").text(list[0])
+                $('#onebtn').show()
+                $('#twobtn').show()
+                $('#threebtn').show(); 
+                $('#fourbtn').show(); 
+                if (listlen == 6){
+                    $('#onebtn').html(list[1]);
+                    $('#twobtn').html(list[2]);
+                    $('#threebtn').html(list[3]);
+                    $('#fourbtn').html(list[4]);
+                }
+                if (listlen == 5){
+                    $('#onebtn').html(list[1]);
+                    $('#twobtn').html(list[2]);
+                    $('#threebtn').html(list[3]);
+                    $('#fourbtn').hide();
+                }
+                if (listlen == 4){
+                    $('#onebtn').html(list[1]);
+                    $('#twobtn').html(list[2]);
+                    $('#threebtn').hide();
+                    $('#fourbtn').hide();
+                }
+                if (listlen == 3){
+                    $('#onebtn').html(list[1]);
+                    $('#twobtn').hide();
+                    $('#threebtn').hide(); 
+                    $('#fourbtn').hide();
+                }
+                }
+                
+                
+            });
+            socket.on('end', function(correct){
+                console.log('correctqs: ' + correct);
+                end = true; 
+                $("#answer_status").hide(); 
+                $("html").show(); 
+                $("body").show(); 
+                $("#correct").show();
+                $("#correct").text("Total Correct: " + correct + "\n Reload the page to restart");
+                $("button").hide(); 
+            })
           })
     </script>
+    <h1>TrivialQuestions Client</h1>
+    <p id="correct" style="display:none;"></p>
+    <p id="question"></p>
     <p id="answer_status"></p>
     <button id="onebtn">1</button>
     <button id="twobtn">2</button>
