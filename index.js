@@ -22,22 +22,26 @@ io.on('connection', function(socket){
         console.log('A user disconnected');
     });
     socket.on('sended', function(val){
-        console.log("A user sent a response: " + val)
-        
-        if (val == 1){
+        //quick hack
+        val -= 1; 
+        console.log("A user sent a response: " + val);
+        console.log("ans: " + getAns(currentq));
+
+        if (getAns(currentq) == val){
             io.emit('correct', true);
-            correctqs += 1; 
+            correctqs += 1;
         }
         else {
-            io.emit('correct', false)
+            io.emit('correct', false);
         }
         if (currentq + 1 == totalQs()){
             io.emit("end", correctqs);
             correctqs = 0; 
             currentq = -1; //compensation
         }
-        currentq += 1
-        io.emit('questionlist', getQ(currentq))
+        currentq += 1;
+        io.emit('questionlist', getQ(currentq));
+        
     });
 });
 http.listen(3000, function(){
@@ -52,4 +56,10 @@ function getQ(qid){
 
 function totalQs(){
     return questioncontent.split("\n\n").length;
+}
+
+function getAns(qid){
+    qarr = questioncontent.split("\n\n")
+
+    return qarr[qid].split("\n")[qarr[qid].split("\n").length -1];
 }
